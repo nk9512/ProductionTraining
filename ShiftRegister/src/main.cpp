@@ -20,7 +20,7 @@ void setup()
 void loop() 
 {
   //　LED1からLED8までのレジスタを初期化。
-  leds = B11111111;                          //初期化設定、b00000000（8bitを0にする）
+  leds = B11111111;                          //初期化設定、b11111111（全て消灯）
   digitalWrite(rclkPin, LOW);                //送信中のRCLKをLowにする
   shiftOut(dsPin, srclkPin, LSBFIRST, leds); //全てのLEDを消灯
   digitalWrite(rclkPin, HIGH);               //送信終了後RCLKをHighにする
@@ -30,7 +30,7 @@ void loop()
   //　LED1からLED8までを順に光らせる。
   for (int i = 0; i < 8; i++)
   {
-    bitClear(leds, i);                           //bitbyte操作関数で指定したビットを1にする
+    bitClear(leds, i);                           //bitbyte操作関数で指定したビットを0にする
     
     digitalWrite(rclkPin, LOW);                //送信中のRCLKをLowにする
     shiftOut(dsPin, srclkPin, LSBFIRST, leds); //シフト演算を使って点灯するLEDを選択
