@@ -1,18 +1,41 @@
 #include <Arduino.h>
+#define rclkPin 11   // (11) ST_CP [RCLK] on 74HC595
+#define srclkPin 9  // (9)  SH_CP [SRCLK] on 74HC595
+#define dsPin 12     // (12) DS [SER] on 74HC595
+#define tDelay 200   //200ms遅延設定
 
-// put function declarations here:
-int myFunction(int, int);
+//Lesson 20-1 8bitシフトレジスタを使ってLEDを順番に点灯２
+//https://omoroya.com/
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+
+byte leds = B00000000; //ledsをbyte型としてb00000000で定義
+
+void setup() 
+{
+  pinMode(rclkPin, OUTPUT);   //11番ピンをOUTPUTとして定義
+  pinMode(dsPin, OUTPUT);     //12番ピンをOUTPUTとして定義
+  pinMode(srclkPin, OUTPUT);  //9番ピンをOUTPUTとして定義
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void loop() 
+{
+  //　LED1からLED8までのレジスタを初期化。
+  leds = 0;                                  //初期化設定、b00000000（8bitを0にする）
+  digitalWrite(rclkPin, LOW);                //送信中のRCLKをLowにする
+  shiftOut(dsPin, srclkPin, LSBFIRST, leds); //全てのLEDを消灯
+  digitalWrite(rclkPin, HIGH);               //送信終了後RCLKをHighにする
+  
+  delay(tDelay);
+  
+  //　LED1からLED8までを順に光らせる。
+  for (int i = 0; i < 8; i++)
+  {
+    bitSet(leds, i);                           //bitbyte操作関数で指定したビットを1にする
+    
+    digitalWrite(rclkPin, LOW);                //送信中のRCLKをLowにする
+    shiftOut(dsPin, srclkPin, LSBFIRST, leds); //シフト演算を使って点灯するLEDを選択
+    digitalWrite(rclkPin, HIGH);               //送信終了後RCLKをHighにする
+    
+    delay(tDelay);
+  }
 }
