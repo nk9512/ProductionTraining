@@ -3,7 +3,7 @@
 #define srclkPin 9  // (9)  SH_CP [SRCLK] on 74HC595
 #define dsPin 12     // (12) DS [SER] on 74HC595
 #define tDelay 200   //200ms遅延設定
-#define unchi うんち
+
 //Lesson 20-1 8bitシフトレジスタを使ってLEDを順番に点灯２
 //https://omoroya.com/
 
