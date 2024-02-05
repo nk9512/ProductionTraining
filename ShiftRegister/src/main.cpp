@@ -1,9 +1,8 @@
 #include <Arduino.h>
-#define rclkPin 11   // (11) ST_CP [RCLK] on 74HC595
-#define srclkPin 9  // (9)  SH_CP [SRCLK] on 74HC595
-#define dsPin 12     // (12) DS [SER] on 74HC595
-#define tDelay 200   //200ms遅延設定
-#define unchi うんち
+const uint8_t rclkPin  = 11;   // (11) ST_CP [RCLK] on 74HC595
+const uint8_t srclkPin =  9;  // (9)  SH_CP [SRCLK] on 74HC595
+const uint8_t dsPin = 12;     // (12) DS [SER] on 74HC595
+const uint8_t tDelay = 200;   //200ms遅延設定
 //Lesson 20-1 8bitシフトレジスタを使ってLEDを順番に点灯２
 //https://omoroya.com/
 
