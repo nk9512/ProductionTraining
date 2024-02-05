@@ -38,4 +38,3 @@ void loop()
     delay(tDelay);
   }
 }
-//うんち
