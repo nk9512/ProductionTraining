@@ -27,17 +27,15 @@ void ToShiftRegister(uint8_t bitData[]) //シフトレジスターにLED点灯�
 
 void setup() 
 {
-  pinMode(rclkPin, OUTPUT);   //11番ピンをOUTPUTとして定義
-  pinMode(dsPin, OUTPUT);     //12番ピンをOUTPUTとして定義
-  pinMode(srclkPin, OUTPUT);  //9番ピンをOUTPUTとして定義
+  DDRB = 0b00011010;  //rclkPin,srclkPin,dsPinをOUTPUTに設定
 }
 
 void loop() 
 {
   BitTranslate(Position,leds);
-  digitalWrite(rclkPin, LOW);                //送信中のRCLKをLowにする
+  PORTB &= 0b11110111;               //送信中のRCLKをLowにする
   ToShiftRegister(leds);
-  digitalWrite(rclkPin, HIGH);               //送信終了後RCLKをHighにする
+  PORTB |= 0b00001000;              //送信終了後RCLKをHighにする
   
   delay(tDelay);
 }
