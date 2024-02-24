@@ -21,7 +21,7 @@ void ToShiftRegister(uint8_t bitData[]) //シフトレジスターにLED点灯�
 {
   for (int i = 0; i < 8; i++)
   {
-      shiftOut(dsPin, srclkPin, LSBFIRST, bitData[i]);  //ShiftOut...Byte単位でデータをシリアル的に送信する。
+    shiftOut(dsPin, srclkPin, LSBFIRST, bitData[i]);  //ShiftOut...Byte単位でデータをシリアル的に送信する。
   }
 }
 
